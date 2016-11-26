@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-from setuptools import find_packages, setup
+from setuptools import setup
 
 
 PACKAGE_NAME = 'cenaming'
@@ -21,8 +21,9 @@ def get_requirements(requirement_file):
 
 
 setup(name=PACKAGE_NAME,
-      packages=find_packages(PACKAGE_NAME),
+      packages=[PACKAGE_NAME],
       include_package_data=True,
+      license='MIT',
       version=version_ns['__version__'],
       description='Company legal name normalization and shortening.',
       url='https://github.com/portfoliome/cenaming',
