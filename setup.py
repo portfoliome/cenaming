@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 
+import os
 from setuptools import find_packages, setup
 
 
 PACKAGE_NAME = 'cenaming'
+ENCODING = 'utf-8'
+
+local_directory = os.path.abspath(os.path.dirname(__file__))
+version_path = os.path.join(local_directory, PACKAGE_NAME, '_version.py')
+
+version_ns = {}
+with open(version_path, 'r', encoding=ENCODING) as f:
+    exec(f.read(), {}, version_ns)
 
 
 def get_requirements(requirement_file):
@@ -17,7 +26,7 @@ setup(name=PACKAGE_NAME,
           '': ['*.txt', '*.sql', '*.json'],
       },
       include_package_data=True,
-      version='0.0.1',
+      version=version_ns['__version__'],
       description='Company legal name normalization and shortening.',
       url='https://github.com/portfoliome/cenaming',
       author='Philip Martin',
