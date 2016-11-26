@@ -22,9 +22,6 @@ def get_requirements(requirement_file):
 
 setup(name=PACKAGE_NAME,
       packages=find_packages(PACKAGE_NAME),
-      package_data={
-          '': ['*.txt', '*.sql', '*.json'],
-      },
       include_package_data=True,
       version=version_ns['__version__'],
       description='Company legal name normalization and shortening.',
@@ -39,7 +36,6 @@ setup(name=PACKAGE_NAME,
           'Topic :: Utilities'
       ],
       keywords='companies finance names',
-      tests_require=get_requirements('requirements-test.txt'),
       extras_require={
           'develop': get_requirements('requirements-dev.txt'),
           'test': get_requirements('requirements-test.txt')
