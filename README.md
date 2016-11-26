@@ -8,7 +8,7 @@ While cenaming unfortunately can't contain our whole simplification and normaliz
 
 ## Example
 ```python
-from cenaming.name_shortener import remove_org_descriptors
+from cenaming import remove_org_descriptors
 
 
 simple_name = remove_org_descriptors('The Priceline Group, Inc.')
