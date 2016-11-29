@@ -2,8 +2,8 @@ import unittest
 
 from cenaming.name_shortener import (
     remove_the, remove_slashed_numbers, remove_state_suffix,
-    remove_parenthesis_numbers, remove_with_comma, remove_end_descriptors,
-    remove_org_descriptors
+    remove_parenthesis_numbers, remove_with_comma, remove_compound,
+    remove_end_descriptors, remove_org_descriptors
 )
 
 
@@ -19,6 +19,9 @@ class TestHelperFunctions(unittest.TestCase):
 
     def test_remove_state_suffix(self):
         self.check_name(remove_state_suffix('Some Company (New York)'))
+
+    def test_remove_compound(self):
+        self.check_name(remove_compound('Some Company Holdings, Inc.'))
 
     def test_remove_with_comma(self):
         self.check_name(remove_with_comma('Some Company, Inc.'))

@@ -41,10 +41,15 @@ ORGANIZATION_NO_COMMA = frozenset([
     'Co. KCSC',
     'SAOG',
     'Incorporated',
+    # potentially convert "Holding" to keyword term
     'Holding Public Co.',
     'Holding Corp.',
     'Holding SE',
     'Holding OJSC',
+    'Holding AG',
+    'Holding SA',
+    'Holding NV',
+    'Holdings Plc',
     'Public Co.',
     'Co. KSCC',
     'Hold AD',
@@ -82,31 +87,41 @@ ORGANIZATION_NO_COMMA = frozenset([
     '\(New York, New York\)']
 )
 
+# compound organizational abbreviations with comma that need to be removed concurrently
+COMPOUND_COMMA = frozenset(['Holdings, Inc.'])
+
 SLASH_NUMBER_RE = r' /\d+/$'
 PARENTHESIS_NUMBER_RE = r' \(\d+\)$'
+
 US_STATE_PARENTHESIS_RE = r' ({})$'.format(
     '|'.join('\({}\)'.format(state) for state in STATE_NAMES)
 )
-
 ORGANIZATIONAL_COMMA_RE = ', ({})'.format(
-    '|'.join(o for o in ORGANIZATION_POST_COMMA))
+    '|'.join(o for o in ORGANIZATION_POST_COMMA)
+)
+COMPOUND_COMMA_RE = ' ({})'.format('|'.join(o for o in COMPOUND_COMMA))
 ORGANIZATIONAL = ORGANIZATION_POST_COMMA.union(ORGANIZATION_NO_COMMA)
 END_ORG_PATTERN = r' ({})$'.format('|'.join(ORGANIZATIONAL))
 END_ORG_RE = r'.*' + END_ORG_PATTERN
 
 
-def remove_with_comma(company_name):
-    if ',' in company_name:
-        company_name = re.sub(ORGANIZATIONAL_COMMA_RE, '', company_name)
-
-    return company_name
-
-
 def remove_org_descriptors(company_name):
+    company_name = remove_compound(company_name)
     company_name = remove_suffixes(company_name)
     company_name = remove_with_comma(company_name)
     company_name = remove_end_descriptors(company_name)
     company_name = remove_the(company_name)
+
+    return company_name
+
+
+def remove_compound(company_name):
+    return re.sub(COMPOUND_COMMA_RE, '', company_name)
+
+
+def remove_with_comma(company_name):
+    if ',' in company_name:
+        company_name = re.sub(ORGANIZATIONAL_COMMA_RE, '', company_name)
 
     return company_name
 
