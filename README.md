@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/portfoliome/cenaming.svg?branch=master)](https://travis-ci.com/portfoliome/cenaming)
+[![codecov.io](http://codecov.io/github/portfoliome/cenaming/coverage.svg?branch=master)](http://codecov.io/github/portfoliome/cenaming?branch=master)
+[![Code Health](https://landscape.io/github/portfoliome/cenaming/master/landscape.svg?style=flat)](https://landscape.io/github/portfoliome/cenaming/master)
+
 # cenaming
 Company legal name normalization and shortening
 
